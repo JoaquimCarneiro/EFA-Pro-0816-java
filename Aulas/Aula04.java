@@ -5,12 +5,14 @@ import Programas.Pensao;
 import Programas.PensaoCliente;
 import com.java.FuncoesUi;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Aula04 {
     public Aula04(String titulo){
         int opcao;
-        String[] opcoesMenu = {"Altura média", "Produto", "Pensão"};
+        String[] opcoesMenu = {"Altura média", "Produto", "Pensão", "listas"};
         do {
             FuncoesUi.clearConsole();
             opcao = FuncoesUi.Menu(
@@ -158,6 +160,25 @@ public class Aula04 {
 
 
                     FuncoesUi.Separador('#', 70, 2, 1);
+                    break;
+
+                case 4:
+                    FuncoesUi.clearConsole();
+                    FuncoesUi.Titulo(opcoesMenu[3], 70, '#', 0, 2);
+
+                    List <String> lista = new ArrayList<>();
+
+                    lista.add("Maria");
+                    lista.add("Pedro");
+                    lista.add("Rui");
+                    lista.add("Ana");
+
+                    for (String item : lista){
+                        System.out.println(item);
+                    }
+
+                    FuncoesUi.Separador('#', 70, 2, 1);
+                    FuncoesUi.continuar("Continuar?", "s");
                     break;
 
                 /*case 2:
