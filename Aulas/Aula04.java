@@ -1,8 +1,6 @@
 package Aulas;
 
-import Programas.CriarProduto;
-import Programas.Pensao;
-import Programas.PensaoCliente;
+import Programas.*;
 import com.java.FuncoesUi;
 
 import java.util.ArrayList;
@@ -12,7 +10,7 @@ import java.util.Scanner;
 public class Aula04 {
     public Aula04(String titulo){
         int opcao;
-        String[] opcoesMenu = {"Altura média", "Produto", "Pensão", "listas"};
+        String[] opcoesMenu = {"Altura média", "Produto", "Pensão", "Listas", "Funcionários"};
         do {
             FuncoesUi.clearConsole();
             opcao = FuncoesUi.Menu(
@@ -173,9 +171,50 @@ public class Aula04 {
                     lista.add("Rui");
                     lista.add("Ana");
 
+                    lista.add(2, "marco");
+
+                    System.out.println("A lista tem " + lista.size() + " items.");
+
                     for (String item : lista){
-                        System.out.println(item);
+                        System.out.println("\t" + item);
                     }
+                    FuncoesUi.Separador('#', 70, 2, 1);
+                    lista.remove("Ana");
+                    lista.remove(1);
+                    lista.removeIf(x->x.charAt(0) == 'M');
+
+                    System.out.println("A lista tem " + lista.size() + " items.");
+
+                    for (String item : lista){
+                        System.out.println("\t" + item);
+                    }
+
+                    FuncoesUi.Separador('#', 70, 2, 1);
+                    FuncoesUi.continuar("Continuar?", "s");
+                    break;
+
+                case 5:
+                    FuncoesUi.clearConsole();
+                    FuncoesUi.Titulo(opcoesMenu[4], 70, '#', 0, 2);
+
+                    FuncionariosEmpresa frangoGrelhado = new FuncionariosEmpresa();
+                    int qtdFuncionarios = FuncoesUi.VerificaInt("Quantos Funcionários deseja adicionar", "tem que inserir um numero inteiro");
+
+                    int id;
+                    String nome;
+                    double salario;
+                    for (int ctrl = 0; ctrl < qtdFuncionarios; ctrl++){
+                        id = FuncoesUi.VerificaInt("Digite o numero de funcionario", "Tem que inserir um numero inteiro");
+                        nome = FuncoesUi.fazPergunta("Digite o nome do funcionario");
+                        salario = FuncoesUi.VerificaDouble("Introduza o salário do funcionario", "Tem que introduzir um numero real.");
+
+                        boolean controle;
+                        do {
+                            controle = frangoGrelhado.addFuncionario(id, nome, salario);
+                        }while (!controle);
+                    }
+
+                    System.out.println(frangoGrelhado.toString());
 
                     FuncoesUi.Separador('#', 70, 2, 1);
                     FuncoesUi.continuar("Continuar?", "s");
@@ -188,7 +227,6 @@ public class Aula04 {
                     FuncoesUi.Separador('#', 70, 2, 1);
                     FuncoesUi.continuar("Continuar?", "s");
                     break;*/
-
                 default:
                     System.out.println("a voltar ao menu anterior");
                     break;

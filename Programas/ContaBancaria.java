@@ -3,10 +3,13 @@ package Programas;
 public class ContaBancaria {
     private int numeroConta;
     private String titular;
-    private double saldo = 0;
+    protected double saldo = 0;
 
-    private final double taxa = 5;
+    protected final double taxa = 5;
 
+    public ContaBancaria(){
+
+    }
     public ContaBancaria(int numeroConta, String titular, double saldo) {
         this.numeroConta = numeroConta;
         this.titular = titular;
@@ -36,11 +39,11 @@ public class ContaBancaria {
         this.titular = titular;
     }
 
-    public void setSaldo(double saldo) {
-        if (saldo >= 0){
-            this.saldo += saldo;
+    public void setSaldo(double movimento) {
+        if (movimento >= 0){
+            this.saldo += movimento;
         }else {
-            this.saldo += -taxa + saldo;
+            this.saldo += -taxa + movimento;
         }
 
     }
