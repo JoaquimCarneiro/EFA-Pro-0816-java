@@ -104,7 +104,7 @@ public class Aula04 {
                             case 2:
                                 FuncoesUi.clearConsole();
                                 FuncoesUi.Titulo("Checkin", 70, '-',0, 2);
-                                //falta a verificação de que existem quartos disponíveis
+                                //falta verificação de que existem quartos disponíveis
                                 //falta verificação da quantidade de quartos relativamente ao numero de quartos disponíveis
                                 int numCheckin = FuncoesUi.VerificaInt("Quantos quartos para fazer checkin", "tem que introduzir um numero inteiro");
                                 int quarto;
@@ -153,9 +153,6 @@ public class Aula04 {
                         }
 
                     }while (menuPensao != 0);
-                    //System.out.println(novaPensao);
-                    //System.out.println(novaPensao.listaQuartos());
-
 
                     FuncoesUi.Separador('#', 70, 2, 1);
                     break;
@@ -197,27 +194,77 @@ public class Aula04 {
                     FuncoesUi.clearConsole();
                     FuncoesUi.Titulo(opcoesMenu[4], 70, '#', 0, 2);
 
-                    FuncionariosEmpresa frangoGrelhado = new FuncionariosEmpresa();
-                    int qtdFuncionarios = FuncoesUi.VerificaInt("Quantos Funcionários deseja adicionar", "tem que inserir um numero inteiro");
+                    /* Criar empresa e adicionar funcionários adicionais */
+                    String nomeEmpresa = FuncoesUi.fazPergunta("Digite o nome da empresa");
+                    FuncionariosEmpresa novaEmpresa = new FuncionariosEmpresa(nomeEmpresa);
+                    int qtdFuncionarios = FuncoesUi.VerificaInt("Quantos Funcionários iniciais deseja adicionar", "tem que inserir um numero inteiro");
 
-                    int id;
-                    String nome;
-                    double salario;
                     for (int ctrl = 0; ctrl < qtdFuncionarios; ctrl++){
-                        id = FuncoesUi.VerificaInt("Digite o numero de funcionario", "Tem que inserir um numero inteiro");
-                        nome = FuncoesUi.fazPergunta("Digite o nome do funcionario");
-                        salario = FuncoesUi.VerificaDouble("Introduza o salário do funcionario", "Tem que introduzir um numero real.");
-
-                        boolean controle;
-                        do {
-                            controle = frangoGrelhado.addFuncionario(id, nome, salario);
-                        }while (!controle);
+                        // Função local
+                        pedirAdicionarFuncionario(novaEmpresa);
                     }
+                    FuncoesUi.clearConsole();
+                    int menuEmpresa;
 
-                    System.out.println(frangoGrelhado.toString());
+                    do {
+                        String[] opcoesEmpresa = {"Adicionar funcionário", "Remover funcionário", "Aumentar funcionário", "Listar funcionários"};
+                        menuEmpresa = FuncoesUi.Menu(
+                                novaEmpresa.getNomeDaEmpresa() + " - Operações",
+                                opcoesEmpresa,
+                                "Insira uma opção",
+                                "Opção inválida",
+                                70,
+                                '-');
+
+                        switch (menuEmpresa) {
+                            case 1:
+                                FuncoesUi.clearConsole();
+                                FuncoesUi.Titulo(opcoesEmpresa[0], 70, '-',0, 2);
+                                // Função local
+                                pedirAdicionarFuncionario(novaEmpresa);
+                                break;
+                            case 2:
+                                FuncoesUi.clearConsole();
+                                FuncoesUi.Titulo(opcoesEmpresa[1], 70, '-',0, 2);
+                                int delFuncionario;
+                                boolean funcionario = true;
+                                do {
+                                    if(!funcionario){
+                                        System.out.println("Funcionário não existe");
+                                    }
+                                    delFuncionario = FuncoesUi.VerificaInt("Id do funcionário a remover (-1 para sair)", "Tem que inserir um numero inteiro");
+                                    funcionario = novaEmpresa.procuraFuncionarioLista(delFuncionario);
+                                }while (!funcionario && delFuncionario != -1);
+                                novaEmpresa.delFuncionário(delFuncionario);
+                                break;
+                            case 3:
+                                FuncoesUi.clearConsole();
+                                FuncoesUi.Titulo(opcoesEmpresa[2], 70, '-',0, 2);
+                                int aumentarFuncionario;
+                                boolean controlefuncionario = true;
+                                do {
+                                    if(!controlefuncionario){
+                                        System.out.println("Funcionário não existe");
+                                    }
+                                    aumentarFuncionario = FuncoesUi.VerificaInt("Id do funcionário a aumentar (-1 para sair)", "Tem que inserir um numero inteiro");
+                                    controlefuncionario = novaEmpresa.procuraFuncionarioLista(aumentarFuncionario);
+                                }while (!controlefuncionario && aumentarFuncionario != -1);
+                                double percentagem = FuncoesUi.VerificaDouble("Insira a percentagem a aumentar", "Tem que inserir um numero real");
+                                novaEmpresa.aumentaFuncionarioLista(aumentarFuncionario,percentagem);
+                                break;
+                            case 4:
+                                FuncoesUi.clearConsole();
+                                FuncoesUi.Titulo(opcoesEmpresa[3], 70, '-',0, 2);
+                                System.out.println(novaEmpresa);
+                                FuncoesUi.continuar("Continuar?", "s");
+                                break;
+                            case 0:
+                                break;
+                        }
+                    }while (menuEmpresa != 0);
+
 
                     FuncoesUi.Separador('#', 70, 2, 1);
-                    FuncoesUi.continuar("Continuar?", "s");
                     break;
 
                 /*case 2:
@@ -232,5 +279,29 @@ public class Aula04 {
                     break;
             }
         }while (opcao != 0);
+    }
+
+    /* pede dados do funcionário, cria funcionario e adiciona-o à empresa */
+    private void pedirAdicionarFuncionario(FuncionariosEmpresa empresa){
+        int id;
+        String nome;
+        double salario;
+        boolean controle = false;
+
+        /* Perguntar e verificar que funcionário não existe na lista */
+        do {
+            if (controle){
+                System.out.println("Funcionário já existe.");
+            }
+            id = FuncoesUi.VerificaInt("Digite o numero de funcionario", "Tem que inserir um numero inteiro");
+            controle = empresa.procuraFuncionarioLista(id);
+
+        }while (controle);
+        /* pedir resto dos dados */
+        nome = FuncoesUi.fazPergunta("Digite o nome do funcionario");
+        salario = FuncoesUi.VerificaDouble("Introduza o salário do funcionario", "Tem que introduzir um numero real.");
+        /* adicionar funcionario */
+        empresa.addFuncionario(id, nome, salario);
+        FuncoesUi.Separador('-', 70, 1, 0);
     }
 }

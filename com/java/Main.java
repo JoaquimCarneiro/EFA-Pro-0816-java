@@ -13,7 +13,7 @@ public class Main {
         // System.out.println(Locale.getDefault());
         
         int opcao;
-        String[] opcoesMenu = {"Aula 01/02 - Strings/Math ", "Aula 03/04 - Condições/loops", "Aula 05/06 - Objetos", "Aula 07/08 - Vetores"};
+        String[] opcoesMenu = {"Strings/Math ", "Condições/loops", "Classes/Objetos", "Vetores"};
         do {
             FuncoesUi.clearConsole();
             opcao = FuncoesUi.Menu(
