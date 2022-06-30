@@ -39,4 +39,13 @@ public class ContaBancariaEmpresa extends ContaBancaria{
             System.out.println("Operação inválida!");
         }
     }
+
+    @Override
+    public String toString() {
+        return  "Numero de Conta: " + numeroConta + "\n" +
+                "Titular: '" + titular + '\'' + "\n" +
+                "Tipo de Conta: Empresarial\n" +
+                "Saldo: " + saldo + "\n" +
+                "Limite de Emprestimo: " + limiteEmprestimo + "\n" ;
+    }
 }

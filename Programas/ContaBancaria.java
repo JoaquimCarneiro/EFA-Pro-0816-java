@@ -1,8 +1,8 @@
 package Programas;
 
 public class ContaBancaria {
-    private int numeroConta;
-    private String titular;
+    protected int numeroConta;
+    protected String titular;
     protected double saldo = 0;
 
     protected final double taxa = 5;
@@ -49,8 +49,9 @@ public class ContaBancaria {
     }
 
     public String toString() {
-        return  "numeroConta: " + numeroConta + '\n' +
-                "titular: " + titular + '\n' +
+        return  "Numero de Conta: " + numeroConta + '\n' +
+                "Titular: '" + titular + "\'\n" +
+                "Tipo de Conta: Normal\n" +
                 "saldo: " + saldo + "€\n" ;
     }
 }

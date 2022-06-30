@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Aula04 {
     public Aula04(String titulo){
         int opcao;
-        String[] opcoesMenu = {"Altura média", "Produto", "Pensão", "Listas", "Funcionários"};
+        String[] opcoesMenu = {"Altura média", "Produto", "Pensão", "Listas", "Funcionários", "Contas bancarias"};
         do {
             FuncoesUi.clearConsole();
             opcao = FuncoesUi.Menu(
@@ -265,6 +265,30 @@ public class Aula04 {
 
 
                     FuncoesUi.Separador('#', 70, 2, 1);
+                    break;
+
+                case 6:
+                    FuncoesUi.clearConsole();
+                    FuncoesUi.Titulo(opcoesMenu[5], 70, '#', 0, 2);
+
+                    ContaBancaria conta = new ContaBancaria(1, "Joaquim Carneiro", 1000);
+                    ContaBancariaEmpresa contaEmpresa = new ContaBancariaEmpresa(2001, "IEFP", 20000, 100);
+
+                    //upcasting
+                    ContaBancaria conta1 = contaEmpresa;
+                    ContaBancaria conta2 = new ContaBancariaEmpresa(2002, "BCP", 5.0E10, 50000);
+
+                    //Downcasting
+                    ContaBancariaEmpresa conta3 = (ContaBancariaEmpresa) conta2;
+
+                    System.out.println(conta);
+                    System.out.println(contaEmpresa);
+                    System.out.println(conta1);
+                    System.out.println(conta2);
+                    System.out.println(conta3);
+
+                    FuncoesUi.Separador('#', 70, 2, 1);
+                    FuncoesUi.continuar("Continuar?", "s");
                     break;
 
                 /*case 2:
