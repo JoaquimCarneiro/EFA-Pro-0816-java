@@ -287,6 +287,15 @@ public class Aula04 {
                     System.out.println(conta2);
                     System.out.println(conta3);
 
+                    ContaBancaria contaPoupanca = new ContaBancariaPoupanca(1, "Joaquim Carneiro", 1000, 5);
+                    System.out.println("Conta Poupança ");
+                    System.out.println(contaPoupanca);
+
+                    System.out.println("Conta Poupança - remover 10 ");
+                    contaPoupanca.setSaldo(-10);
+
+                    System.out.println(contaPoupanca);
+
                     FuncoesUi.Separador('#', 70, 2, 1);
                     FuncoesUi.continuar("Continuar?", "s");
                     break;

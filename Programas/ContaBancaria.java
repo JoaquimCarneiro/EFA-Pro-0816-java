@@ -43,7 +43,7 @@ public class ContaBancaria {
         if (movimento >= 0){
             this.saldo += movimento;
         }else {
-            this.saldo += -taxa + movimento;
+            this.saldo -= taxa + movimento;
         }
 
     }

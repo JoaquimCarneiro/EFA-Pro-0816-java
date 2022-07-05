@@ -29,11 +29,20 @@ public class ContaBancariaPoupanca extends ContaBancaria{
     }
 
     @Override
+    public void setSaldo(double movimento){
+        if (movimento >= 0){
+            this.saldo += movimento;
+        }else { //LOL
+            this.saldo -= -movimento;
+        }
+    }
+
+    @Override
     public String toString() {
         return "ContaBancariaPoupanca{" +
-                ", numeroConta=" + numeroConta +
+                "numeroConta=" + numeroConta +
                 ", titular='" + titular + '\'' +
-                "taxaJuro=" + taxaJuro +
+                ", taxaJuro=" + taxaJuro +
                 ", saldo=" + saldo +
                 '}';
     }
